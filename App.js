@@ -14,28 +14,26 @@ import AddProducts from "./Components/AddProducts";
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
 
-  const submitHandler = (toto) => {
+  const submitHandler = (toto, setProduct) => {
     const idString = Date.now().toString();
     setMyProducts([{ key: idString, name: toto }, ...myProducts]);
-    // setProduct("");
   };
 
-  const handleDelete = () => {
+  const handleDeleteOneArticle = (key) => {
+    setMyProducts(myProducts.filter((item) => item.key != key));
+  };
+
+  const handleDeleteAllProducts = () => {
     setMyProducts([]);
-  };
+  }
 
-  //   const renderItem = ({item}) => (
-  //     <View style={styles.item} >
-  //        <Text style={styles.element}> {item.name} </Text>
-  // </View>
-  //   )
 
   return (
     <View style={styles.container}>
-      <AddProducts submitHandler={submitHandler} handleDelete={handleDelete}/>
+      <AddProducts submitHandler={submitHandler} handleDeleteAllProducts={handleDeleteAllProducts}/>
       <FlatList
         data={myProducts}
-        renderItem={({ item }) => <Products toto={item.name} />}
+        renderItem={({ item }) => <Products toto={item.name} idString={item.key} handleDeleteOneArticle={handleDeleteOneArticle} />}
       />
     </View>
   );
@@ -43,7 +41,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 40,
+    padding: 20,
     paddingTop: 60,
   },
   item: {
