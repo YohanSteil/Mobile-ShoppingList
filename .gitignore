@@ -1,0 +1,32 @@
+# React Native
+node_modules/
+.expo/
+.vscode/
+*.log
+*.lock
+.DS_Store
+*.iml
+.idea/
+.env
+*.tmp
+.tmp/
+
+# macOS
+*.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Build
+build/
+public/
+
+# Others
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
