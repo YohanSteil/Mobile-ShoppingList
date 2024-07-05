@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  Button,
+  Alert,
   StyleSheet,
   Text,
   Pressable,
@@ -16,9 +16,13 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts }) => {
   };
 
   const handleClick = () => {
-    if (product.trim() !== "") {
+    if (product.trim() !== "" && product.length > 0) {
       submitHandler(product);
       setProduct("");
+    } else {
+      Alert.alert("Oups !", "Veuillez entrer un produit valide", [ 
+         { text: "Compris" }
+        ])
     }
   };
 
@@ -34,12 +38,15 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts }) => {
       ></TextInput>
       {/* <Text> grfggr</Text> */}
       <View style={styles.test}>
-      <TouchableOpacity style={styles.button} onPress={handleClick}>
-        <Text style={styles.buttonText}>Ajouter mon produit</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleDeleteAllProducts}>
-        <Text style={styles.buttonText}>Supprimer la liste</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleClick}>
+          <Text style={styles.buttonText}>Ajouter mon produit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleDeleteAllProducts}
+        >
+          <Text style={styles.buttonText}>Supprimer la liste</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 5,
     fontSize: 15,
-    width:"45%",
+    width: "45%",
     justifyContent: "center",
     alignItems: "center",
   },
