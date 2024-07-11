@@ -47,7 +47,7 @@ export default function App() {
         [
           {
             text: "OK",
-            onPress: () => console.warn("Liste rafraîchie !"),
+            // onPress: () => console.warn("Liste rafraîchie !"),
             style: "cancel",
           }
         ]
