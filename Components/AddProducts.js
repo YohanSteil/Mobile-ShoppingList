@@ -5,12 +5,12 @@ import {
   Alert,
   StyleSheet,
   Text,
-  Pressable,
+  Vibration,
   TouchableOpacity,
 } from "react-native";
 
-const AddProducts = ({ submitHandler, handleDeleteAllProducts }) => {
-  const [product, setProduct] = useState("");
+const AddProducts = ({ submitHandler, handleDeleteAllProducts, setShowModal }) => {
+  const [product, setProduct] = useState(""); 
   const inputHandler = (val) => {
     setProduct(val);
   };
@@ -20,9 +20,8 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts }) => {
       submitHandler(product);
       setProduct("");
     } else {
-      Alert.alert("Oups !", "Veuillez entrer un produit valide", [ 
-         { text: "Compris" }
-        ])
+      setShowModal(true);
+      Vibration.vibrate(100);
     }
   };
 
@@ -35,6 +34,7 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts }) => {
         onChangeText={inputHandler}
         onSubmitEditing={handleClick}
         value={product}
+        editable={false}
       ></TextInput>
       {/* <Text> grfggr</Text> */}
       <View style={styles.test}>

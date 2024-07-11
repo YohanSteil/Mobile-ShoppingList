@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View, Pressable, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const Products = ({ toto, handleDeleteOneArticle, idString }) => {
+  const handlePress = () => {
+    handleDeleteOneArticle(idString); // Appel de la fonction pour supprimer l'article
+  };
+
   return (
-    <ScrollView>  
-    <Pressable onPress={() => handleDeleteOneArticle(idString)}>
+    <Pressable onPress={handlePress}>
       <View style={styles.item}>
         <View style={styles.element}>
           <Text style={styles.text}> {toto} </Text>
@@ -12,7 +15,6 @@ const Products = ({ toto, handleDeleteOneArticle, idString }) => {
         </View>
       </View>
     </Pressable>
-    </ScrollView>
   );
 };
 
@@ -30,11 +32,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
   },
-  text:{
+  text: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
-  }
+  },
 });
 
 export default Products;
