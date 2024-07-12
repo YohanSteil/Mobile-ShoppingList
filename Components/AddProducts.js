@@ -34,7 +34,6 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts, setShowModal }) =
         onChangeText={inputHandler}
         onSubmitEditing={handleClick}
         value={product}
-        editable={false}
       ></TextInput>
       {/* <Text> grfggr</Text> */}
       <View style={styles.test}>

@@ -9,6 +9,7 @@ import {
   RefreshControl,
   ScrollView,
   Alert,
+  Image,
 } from "react-native";
 import Products from "./Components/Products";
 import AddProducts from "./Components/AddProducts";
@@ -79,6 +80,9 @@ export default function App() {
                 <View style={styles.modalHeader}>
                   <Text style={styles.modalHeaderText}>OUPS !</Text>
                 </View>
+                <View style={styles.modalCross}>
+                  <Image source={require("./assets/cross.png")} />
+                </View>
                 <View style={styles.modalBody}>
                   <Text style={styles.modalBodyText}>
                     Merci d'indiquer un produit !{" "}
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
     borderColor: "orange",
     borderWidth: 2,
     width: "80%",
-    height: "40%",
+    height: "45%",
     alignItems: "center",
   },
   modalHeader: {
@@ -176,6 +180,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     fontWeight: "bold",
+    padding: 20,
+    width: "100%",
+    textAlign: "center",
   },
   modalFooter: {
     width: "100%",
@@ -197,10 +204,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  modalCross: {
+    paddingTop: 30,
+  },
   spinner: {
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
     color: "orange",
   },
+
 });
