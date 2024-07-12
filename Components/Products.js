@@ -21,6 +21,7 @@ const Products = ({ toto, handleDeleteOneArticle, idString }) => {
 const styles = StyleSheet.create({
   item: {
     marginTop: 20,
+    alignItems: "center",
   },
   element: {
     backgroundColor: "orange",
@@ -29,13 +30,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "white",
     fontWeight: "bold",
-    justifyContent: "space-between",
+    justifyContent: "center",
     flexDirection: "row",
+    alignItems: "center",
+    width: "90%",
+    borderRadius: 10,
   },
   text: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    flexGrow: 1,
   },
 });
 

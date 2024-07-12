@@ -3,21 +3,25 @@ import {
   Modal,
   StyleSheet,
   View,
-  FlatList,
+  ImageBackground,
   Pressable,
   Text,
   RefreshControl,
   ScrollView,
   Alert,
   Image,
+  useWindowDimensions,
 } from "react-native";
+
 import Products from "./Components/Products";
 import AddProducts from "./Components/AddProducts";
+import Header from "./Components/Header";
 
 export default function App() {
   const [myProducts, setMyProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const window = useWindowDimensions();
 
   const submitHandler = (toto, setShowModal) => {
     const idString = Date.now().toString();
@@ -42,87 +46,89 @@ export default function App() {
   const onRefresh = () => {
     setRefresh(true);
     setTimeout(() => {
-      Alert.alert(
-        "Info",
-        "Liste rafraîchie !",
-        [
-          {
-            text: "OK",
-            // onPress: () => console.warn("Liste rafraîchie !"),
-            style: "cancel",
-          }
-        ]
-      );
+      Alert.alert("Info", "Liste rafraîchie !", [
+        {
+          text: "OK",
+          // onPress: () => console.warn("Liste rafraîchie !"),
+          style: "cancel",
+        },
+      ]);
       setRefresh(false);
     }, 500);
   };
 
   return (
-    <ScrollView 
-      refreshControl={
-      <RefreshControl
-      refreshing={refresh}
-      onRefresh={onRefresh}
-      colors={["orange"]}
-      />
-      }>
-    <View style={styles.container}>
-        <>
-          <Modal
-            visible={showModal}
-            onRequestClose={() => setShowModal(false)}
-            animationType="fade"
-            hardwareAccelerated={true}
-            transparent={true}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <View style={styles.modalHeader}>
-                  <Text style={styles.modalHeaderText}>OUPS !</Text>
-                </View>
-                <View style={styles.modalCross}>
-                  <Image source={require("./assets/cross.png")} />
-                </View>
-                <View style={styles.modalBody}>
-                  <Text style={styles.modalBodyText}>
-                    Merci d'indiquer un produit !{" "}
-                  </Text>
-                </View>
-                <View style={styles.modalFooter}>
-                  <Pressable
-                    style={styles.modalFooterPressable}
-                    onPressIn={() => setShowModal(false)}
-                  >
-                    <Text style={styles.modalFooterText}>OK</Text>
-                  </Pressable>
-                </View>
+    <ImageBackground
+      style={[styles.container, { width: window.width, height: window.height }]}
+      source={require("./assets/istockphoto-1163030661-612x612.jpg")}
+      imageStyle={{ opacity: 0.3 }}
+      resizeMode="contain"
+    >
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refresh}
+            onRefresh={onRefresh}
+            colors={["orange"]}
+          />
+        }
+      >
+        <Modal
+          visible={showModal}
+          onRequestClose={() => setShowModal(false)}
+          animationType="fade"
+          hardwareAccelerated={true}
+          transparent={true}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalHeaderText}>OUPS !</Text>
+              </View>
+              <View style={styles.modalCross}>
+                <Image source={require("./assets/cross.png")} />
+              </View>
+              <View style={styles.modalBody}>
+                <Text style={styles.modalBodyText}>
+                  Merci d'indiquer un produit !{" "}
+                </Text>
+              </View>
+              <View style={styles.modalFooter}>
+                <Pressable
+                  style={styles.modalFooterPressable}
+                  onPressIn={() => setShowModal(false)}
+                >
+                  <Text style={styles.modalFooterText}>OK</Text>
+                </Pressable>
               </View>
             </View>
-          </Modal>
-          <AddProducts
-            submitHandler={submitHandler}
-            handleDeleteAllProducts={handleDeleteAllProducts}
-            setShowModal={setShowModal}
+          </View>
+        </Modal>
+        <Header />
+        <AddProducts
+          submitHandler={submitHandler}
+          handleDeleteAllProducts={handleDeleteAllProducts}
+          setShowModal={setShowModal}
+        />
+        {myProducts.map((item) => (
+          <Products
+            key={item.key}
+            toto={item.name}
+            idString={item.key}
+            handleDeleteOneArticle={handleDeleteOneArticle}
           />
-           {myProducts.map((item) => (
-            <Products
-              key={item.key}
-              toto={item.name}
-              idString={item.key}
-              handleDeleteOneArticle={handleDeleteOneArticle}
-            />
-          ))}
-        </>
-      
-    </View>
-    </ScrollView>
+        ))}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    paddingTop: 60,
+    // padding: 20,
+    paddingVertical: 40,
+    flex: 1,
   },
   item: {
     marginTop: 10,
@@ -213,5 +219,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "orange",
   },
-
 });

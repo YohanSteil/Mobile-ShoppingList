@@ -11,8 +11,10 @@ import {
 
 const AddProducts = ({ submitHandler, handleDeleteAllProducts, setShowModal }) => {
   const [product, setProduct] = useState(""); 
+
   const inputHandler = (val) => {
-    setProduct(val);
+    const regex = /[^a-z]/gi;
+    setProduct(val.replace(regex, ""));
   };
 
   const handleClick = () => {
@@ -27,7 +29,7 @@ const AddProducts = ({ submitHandler, handleDeleteAllProducts, setShowModal }) =
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.textTitle}>Ma liste</Text>
+      {/* <Text style={styles.textTitle}>Ma liste</Text> */}
       <TextInput
         style={styles.textInput}
         placeholder="Nouveau produit"
@@ -64,15 +66,16 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     flexGrow: 1,
-    width: "100%",
+    width: "90%",
+    marginVertical: 10,
   },
-  textTitle: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "orange",
-    padding: 10,
-  },
+  // textTitle: {
+  //   fontSize: 30,
+  //   fontWeight: "bold",
+  //   textAlign: "center",
+  //   color: "orange",
+  //   padding: 10,
+  // },
   button: {
     backgroundColor: "white",
     borderWidth: 2,
